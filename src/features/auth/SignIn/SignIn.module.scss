@@ -1,0 +1,54 @@
+@use '~src/styles/variable';
+
+.Root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Header {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  & &_Logo {
+    font-size: 0;
+    width: 38px;
+    height: 38px;
+    margin-right: 16px;
+
+    & > img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  & &_Title {
+    font-family: 'ZCOOL QingKe HuangYou';
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+}
+
+.Form {
+  position: relative;
+  margin-top: 56px;
+  width: 100%;
+
+  & &_Submit {
+    margin-top: 24px;
+  }
+}
+
+@media screen and (min-width: variable.$md) {
+  .Form {
+    width: 480px;
+  }
+}

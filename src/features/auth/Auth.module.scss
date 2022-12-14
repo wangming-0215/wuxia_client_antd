@@ -1,0 +1,15 @@
+.Root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  & > div {
+    flex: 1 1 auto;
+  }
+}
+
+.Form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

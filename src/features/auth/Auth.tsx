@@ -1,6 +1,5 @@
 import { Row, Col } from 'antd';
 
-import LogoImage from 'src/assets/logo.png';
 import Image from './Image';
 import SignIn from './SignIn';
 import classes from './Auth.module.scss';

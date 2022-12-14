@@ -16,19 +16,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "typeRoots": ["./node_modules/@types", "./types"],
-    "baseUrl": ".",
-    "paths": {
-      "src/app/*": ["src/app/*"],
-      "src/assets/*": ["src/assets/*"],
-      "src/components/*": ["src/components/*"],
-      "src/constants/*": ["src/constants/*"],
-      "src/features/*": ["src/features/*"],
-      "src/layouts/*": ["src/layouts/*"],
-      "src/routes/*": ["src/routes/*"],
-      "src/themes/*": ["src/themes/*"],
-      "src/utils/*": ["src/utils/*"],
-      "src/hooks/*": ["src/hooks/*"]
-    }
+    "baseUrl": "."
   },
   "include": ["src", "types"]
 }

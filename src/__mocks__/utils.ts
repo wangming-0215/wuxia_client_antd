@@ -46,7 +46,7 @@ export function verifyToken(token: string) {
 
 export function createResponse<T>(code: number, data: T) {
   const composition = createResponseComposition(undefined, [
-    context.delay('real'),
+    context.delay(2000),
     context.status(code),
     context.json(data),
   ]);

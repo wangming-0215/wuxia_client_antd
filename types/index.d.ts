@@ -4,10 +4,7 @@ declare interface CommonComponentProps {
 
 declare type HttpResponseStatusType = 'success' | 'fail';
 
-/**
- * HTTP 响应
- */
-declare interface HttpResponse<T, E = unknown> {
+interface BaseHttpResponse<T, E = unknown> {
   status: HttpResponseStatusType;
   code: number;
   data: T | null;
@@ -15,7 +12,17 @@ declare interface HttpResponse<T, E = unknown> {
   message: string;
 }
 
-declare interface HttpListResponse<T, E = unknown> extends HttpResponse<T, E> {
+declare interface HttpResponse<T> extends BaseHttpResponse<T> {
+  data: T;
+  error: null;
+}
+
+declare interface HttpError<E = unknown> extends BaseHttpResponse<null, E> {
+  data: null;
+  error: E;
+}
+
+declare interface HttpListResponse<T> extends HttpResponse<T, unknown> {
   data: {
     list: T[];
     total: number; // 总数

@@ -9,5 +9,8 @@ const http = HttpClient.instance;
  * @returns
  */
 export function signIn(username: string, password: string) {
-  return http.post('/api/signin', { username, password });
+  return http.post<HttpResponse<{ token: string }>>('/api/signin', {
+    username,
+    password,
+  });
 }

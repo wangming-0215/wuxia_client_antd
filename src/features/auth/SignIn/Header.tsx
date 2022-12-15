@@ -1,7 +1,7 @@
 import { Typography } from 'antd';
 
 import LogoImage from '../../../assets/logo.png';
-import classes from './styles.module.scss';
+import classes from './SignIn.module.scss';
 
 export default function Header() {
   return (

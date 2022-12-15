@@ -9,3 +9,10 @@ export const regex = {
   password:
     /^\S*(?=\S{6,20})(?=\S*\d)(?=\S*[A-Z])(?=\S*[a-z])(?=\S*[!@#$%^&*? ])\S*$/,
 };
+
+/**
+ * key of local storage
+ */
+export const StorageKey = {
+  jwt: 'x-token',
+} as const;

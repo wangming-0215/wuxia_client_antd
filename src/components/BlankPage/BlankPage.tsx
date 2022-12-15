@@ -3,7 +3,7 @@ import { Typography } from 'antd';
 import { makeStyles } from '../../hooks';
 import Container from '../Container';
 
-import classes from './styles.module.scss';
+import classes from './BlankPage.module.scss';
 
 const { Text } = Typography;
 

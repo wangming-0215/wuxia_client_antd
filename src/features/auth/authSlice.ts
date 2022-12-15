@@ -1,6 +1,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type AxiosError } from 'axios';
+import jwtDecode, { type JwtPayload } from 'jwt-decode';
+import store from 'store2';
 import { LoadingStatus } from '../../constants/enums';
+import { StorageKey } from '../../constants';
 import { signInThunk } from './authThunk';
 
 interface State {
@@ -9,8 +12,19 @@ interface State {
   token: string;
 }
 
+/**
+ * 是否登录
+ * @returns
+ */
+function isAuthenticated() {
+  const token = store.get(StorageKey.jwt);
+  if (!token) return false;
+  const { exp } = jwtDecode<JwtPayload>(token);
+  return Boolean(exp && Date.now() <= exp * 1000);
+}
+
 const initialState: State = {
-  authenticated: false,
+  authenticated: isAuthenticated(),
   status: LoadingStatus.Idle,
   token: '',
 };

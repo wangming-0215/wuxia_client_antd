@@ -1,5 +1,5 @@
 import BackgroundImage from '../../../assets/login_background.png';
-import classes from './styles.module.scss';
+import classes from './Image.module.scss';
 
 export default function Image() {
   return (

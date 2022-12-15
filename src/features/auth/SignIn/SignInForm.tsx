@@ -1,11 +1,13 @@
 import { Form, Input, Button, message, type FormRule } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import store from 'store2';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { StorageKey } from '../../../constants';
 import { LoadingStatus } from '../../../constants/enums';
 import zhCN from '../../../locales/zh_cn';
 import { signInThunk } from '../authThunk';
-import classes from './styles.module.scss';
+import classes from './SignIn.module.scss';
 
 const { Item: FormItem } = Form;
 
@@ -31,7 +33,10 @@ export default function SignInForm() {
 
   const handleSubmit = async ({ username, password }: FormValues) => {
     try {
-      await dispatch(signInThunk({ username, password })).unwrap();
+      const { token } = await dispatch(
+        signInThunk({ username, password }),
+      ).unwrap();
+      store.set(StorageKey.jwt, token);
       navigate('/');
     } catch (error) {
       messageApi.error('hello error');

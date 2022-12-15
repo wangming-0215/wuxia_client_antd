@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import GlobalStyles from './components/GlobalStyles';
-import BlankPage from './components/BlankPage';
+import AuthGuard from './guards/auth.guard';
 
 import Auth from './features/auth';
+import Members from './features/members';
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={<BlankPage>空白页</BlankPage>} />
+            <Route element={<AuthGuard />}>
+              <Route index element={<Members />} />
+            </Route>
             <Route path="signin" element={<Auth />} />
           </Route>
         </Routes>

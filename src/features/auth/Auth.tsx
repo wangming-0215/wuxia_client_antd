@@ -2,7 +2,7 @@ import { Row, Col } from 'antd';
 
 import Image from './Image';
 import SignIn from './SignIn';
-import classes from './styles.module.scss';
+import classes from './Auth.module.scss';
 
 export default function Auth() {
   return (

@@ -30,7 +30,7 @@ export function signToken(id: string) {
   return new jose.SignJWT({})
     .setProtectedHeader({ alg: 'HS256' })
     .setSubject(id)
-    .setIssuedAt(new Date().getTime() / 1000)
+    .setIssuedAt(Math.floor(new Date().getTime() / 1000))
     .setExpirationTime('7d')
     .sign(secret);
 }

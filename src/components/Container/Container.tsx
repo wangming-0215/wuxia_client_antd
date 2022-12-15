@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { type PropsWithChildren } from 'react';
-import classes from './styles.module.scss';
+import classes from './Container.module.scss';
 
 type ContainerProps = PropsWithChildren<CommonComponentProps>;
 

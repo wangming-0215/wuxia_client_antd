@@ -1,15 +1,40 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import * as authService from './authApi';
+import * as authService from './authService';
 
-export const signInThunk = createAsyncThunk<
+/**
+ * login action creator;
+ */
+export const login = createAsyncThunk<
   { token: string },
   { username: string; password: string },
   { rejectValue: AxiosError<HttpError> }
->('auth/signIn', async ({ username, password }, { rejectWithValue }) => {
+>('auth/login', async ({ username, password }, { rejectWithValue }) => {
   try {
-    const response = await authService.signIn(username, password);
+    const response = await authService.login(username, password);
     return response.data.data;
+  } catch (error) {
+    return rejectWithValue(error as AxiosError<HttpError>);
+  }
+});
+
+/**
+ * logout action creator
+ */
+export const logout = createAsyncThunk('auth/logout', () => {
+  authService.logout();
+});
+
+/**
+ * profile action creator
+ */
+export const profile = createAsyncThunk<
+  void,
+  void,
+  { rejectValue: AxiosError<HttpError> }
+>('auth/profile', async (_, { rejectWithValue }) => {
+  try {
+    await authService.profile();
   } catch (error) {
     return rejectWithValue(error as AxiosError<HttpError>);
   }

@@ -10,7 +10,7 @@ export const db = factory({
   },
 });
 
-const PASSWORD = 'Wm@123456';
+const PASSWORD = 'wM@123456';
 
 export function initDB() {
   db.account.create({

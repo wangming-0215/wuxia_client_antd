@@ -1,0 +1,92 @@
+@use '../../styles/variable';
+
+.root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  & > div {
+    flex: 1 1 auto;
+  }
+}
+
+.image {
+  &_root {
+    padding: 16px 0 16px 16px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    & > div {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      //   margin: 16px 0 16px 16px;
+      border-radius: 6px;
+      box-shadow: 0 5px 14px rgb(100 116 139 / 12%);
+
+      & > img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+.login_form {
+  &_root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-left: auto;
+    margin-right: auto;
+
+    & form {
+      position: relative;
+      margin-top: 56px;
+      width: 100%;
+
+      & button {
+        margin-top: 24px;
+      }
+    }
+  }
+
+  &_header {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    & .logo {
+      font-size: 0;
+      width: 38px;
+      height: 38px;
+      margin-right: 16px;
+
+      & > img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    & .title {
+      font-family: 'ZCOOL QingKe HuangYou';
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media screen and (min-width: variable.$md) {
+  .login_form_root form {
+    width: 480px;
+  }
+}

@@ -4,7 +4,11 @@ import { createResponse, getErrorMessage, signToken } from '../utils';
 
 type LoginRequestBody = { username: string; password: string };
 
-function createLoginResolver(): ResponseResolver {
+/**
+ * create login resolver
+ * @returns
+ */
+export function createLoginResolver(): ResponseResolver {
   return async function resolver(req) {
     try {
       const { username, password } = await req.json<LoginRequestBody>();
@@ -55,4 +59,20 @@ function createLoginResolver(): ResponseResolver {
   };
 }
 
-export default createLoginResolver();
+/**
+ * create profile resolver
+ * @returns
+ */
+export function createProfileResolver(): ResponseResolver {
+  return (req) => {
+    console.log(req);
+    const response = createResponse(401, {
+      status: 'fail',
+      code: 401,
+      data: null,
+      error: null,
+      message: '未认证',
+    });
+    return response.send();
+  };
+}

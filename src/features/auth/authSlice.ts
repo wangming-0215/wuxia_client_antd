@@ -1,7 +1,10 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type AxiosError } from 'axios';
+import jwtDecode, { type JwtPayload } from 'jwt-decode';
+import store from 'store2';
 import { LoadingStatus } from '../../constants/enums';
-import { signInThunk } from './authThunk';
+import { StorageKey } from '../../constants';
+import { login } from './authThunk';
 
 interface State {
   authenticated: boolean;
@@ -9,8 +12,19 @@ interface State {
   token: string;
 }
 
+/**
+ * 是否登录
+ * @returns
+ */
+function isAuthenticated() {
+  const token = store.get(StorageKey.jwt);
+  if (!token) return false;
+  const { exp } = jwtDecode<JwtPayload>(token);
+  return Boolean(exp && Date.now() <= exp * 1000);
+}
+
 const initialState: State = {
-  authenticated: false,
+  authenticated: isAuthenticated(),
   status: LoadingStatus.Idle,
   token: '',
 };
@@ -23,18 +37,18 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signInThunk.pending, (state) => {
+      .addCase(login.pending, (state) => {
         state.status = LoadingStatus.Pending;
       })
       .addCase(
-        signInThunk.fulfilled,
+        login.fulfilled,
         (state, action: PayloadAction<{ token: string }>) => {
           state.status = LoadingStatus.Fulfilled;
           state.authenticated = true;
           state.token = action.payload.token;
         },
       )
-      .addCase(signInThunk.rejected, (state) => {
+      .addCase(login.rejected, (state) => {
         state.status = LoadingStatus.Rejected;
         state.authenticated = false;
         state.token = '';

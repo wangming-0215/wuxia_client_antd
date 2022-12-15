@@ -1,7 +1,7 @@
 import { Row, Col } from 'antd';
 
 import Image from './Image';
-import SignIn from './SignIn';
+import Login from './Login';
 import classes from './Auth.module.scss';
 
 export default function Auth() {
@@ -12,7 +12,7 @@ export default function Auth() {
           <Image />
         </Col>
         <Col xs={24} sm={24} md={24} xl={16} xxl={16}>
-          <SignIn />
+          <Login />
         </Col>
       </Row>
     </div>

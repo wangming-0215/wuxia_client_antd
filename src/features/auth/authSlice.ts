@@ -4,7 +4,7 @@ import jwtDecode, { type JwtPayload } from 'jwt-decode';
 import store from 'store2';
 import { LoadingStatus } from '../../constants/enums';
 import { StorageKey } from '../../constants';
-import { signInThunk } from './authThunk';
+import { login } from './authThunk';
 
 interface State {
   authenticated: boolean;
@@ -37,18 +37,18 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signInThunk.pending, (state) => {
+      .addCase(login.pending, (state) => {
         state.status = LoadingStatus.Pending;
       })
       .addCase(
-        signInThunk.fulfilled,
+        login.fulfilled,
         (state, action: PayloadAction<{ token: string }>) => {
           state.status = LoadingStatus.Fulfilled;
           state.authenticated = true;
           state.token = action.payload.token;
         },
       )
-      .addCase(signInThunk.rejected, (state) => {
+      .addCase(login.rejected, (state) => {
         state.status = LoadingStatus.Rejected;
         state.authenticated = false;
         state.token = '';

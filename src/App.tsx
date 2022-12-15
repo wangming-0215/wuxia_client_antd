@@ -18,7 +18,7 @@ function App() {
             <Route element={<AuthGuard />}>
               <Route index element={<Members />} />
             </Route>
-            <Route path="signin" element={<Auth />} />
+            <Route path="login" element={<Auth />} />
           </Route>
         </Routes>
       </BrowserRouter>

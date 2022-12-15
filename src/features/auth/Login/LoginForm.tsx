@@ -1,13 +1,11 @@
 import { Form, Input, Button, message, type FormRule } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import store from 'store2';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { StorageKey } from '../../../constants';
 import { LoadingStatus } from '../../../constants/enums';
 import zhCN from '../../../locales/zh_cn';
-import { signInThunk } from '../authThunk';
-import classes from './SignIn.module.scss';
+import { login } from '../authThunk';
+import classes from './Login.module.scss';
 
 const { Item: FormItem } = Form;
 
@@ -25,18 +23,16 @@ interface FormValues {
  * 登录表单
  * @returns
  */
-export default function SignInForm() {
+export default function LoginForm() {
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.auth.status);
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
+  // 表单提交
   const handleSubmit = async ({ username, password }: FormValues) => {
     try {
-      const { token } = await dispatch(
-        signInThunk({ username, password }),
-      ).unwrap();
-      store.set(StorageKey.jwt, token);
+      await dispatch(login({ username, password })).unwrap();
       navigate('/');
     } catch (error) {
       messageApi.error('hello error');

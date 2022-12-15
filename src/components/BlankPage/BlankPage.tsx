@@ -1,9 +1,9 @@
 import { type PropsWithChildren } from 'react';
 import { Typography } from 'antd';
-import { makeStyles } from 'src/hooks';
+import { makeStyles } from '../../hooks';
 import Container from '../Container';
 
-import classes from './BlankPage.module.scss';
+import classes from './styles.module.scss';
 
 const { Text } = Typography;
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles<{ large: boolean }>((token, props) => ({
 function BlankPage({ children }: PropsWithChildren) {
   const styles = useStyles();
   return (
-    <Container className={classes.Root}>
+    <Container className={classes.root}>
       <Text style={styles.text}>{children}</Text>
     </Container>
   );

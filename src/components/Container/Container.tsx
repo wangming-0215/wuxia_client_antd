@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { type PropsWithChildren } from 'react';
-import classes from './Container.module.scss';
+import classes from './styles.module.scss';
 
 type ContainerProps = PropsWithChildren<CommonComponentProps>;
 
@@ -10,6 +10,6 @@ type ContainerProps = PropsWithChildren<CommonComponentProps>;
  * @returns
  */
 export default function Container({ children, className }: ContainerProps) {
-  const classNames = clsx(classes.Root, className);
+  const classNames = clsx(classes.root, className);
   return <div className={classNames}>{children}</div>;
 }

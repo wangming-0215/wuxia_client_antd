@@ -1,7 +1,7 @@
 import { useEffect, type PropsWithChildren } from 'react';
-import { useToken } from 'src/hooks';
+import { useToken } from '../../hooks';
 
-import './GlobalStyles.scss';
+import './styles.scss';
 
 export default function GlobalStyles({ children }: PropsWithChildren) {
   const { token } = useToken();

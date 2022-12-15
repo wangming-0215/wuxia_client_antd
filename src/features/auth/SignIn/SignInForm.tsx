@@ -1,7 +1,8 @@
 import { Form, Input, Button, type FormRule } from 'antd';
 
-import zhCN from 'src/locales/zh_cn';
-import classes from './SignIn.module.scss';
+import zhCN from '../../../locales/zh_cn';
+import { signIn } from '../authApi';
+import classes from './styles.module.scss';
 
 const { Item: FormItem } = Form;
 
@@ -16,12 +17,13 @@ interface FormValues {
 }
 
 export default function SignInForm() {
-  const handleSubmit = (values: FormValues) => {
-    console.log(values);
+  const handleSubmit = async ({ username, password }: FormValues) => {
+    const response = await signIn(username, password);
+    console.log(response);
   };
 
   return (
-    <div className={classes.Form}>
+    <div className={classes.form}>
       <Form name="sign_in" onFinish={handleSubmit}>
         <FormItem name="username" rules={rules.username}>
           <Input placeholder="用户名" size="large" />
@@ -35,7 +37,7 @@ export default function SignInForm() {
             type="primary"
             htmlType="submit"
             size="large"
-            className={classes.Form_Submit}
+            className={classes.form_submit}
           >
             登录
           </Button>

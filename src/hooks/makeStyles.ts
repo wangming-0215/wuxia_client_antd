@@ -1,6 +1,6 @@
 import React from 'react';
 import { type GlobalToken } from 'antd/es/theme/interface';
-import { useToken } from 'src/hooks';
+import useToken from './useToken';
 
 type StyleCreator<Props, Token> = (
   token: Token,

@@ -19,7 +19,7 @@ export const login = createAsyncThunk<
 });
 
 /**
- * 退出
+ * logout action creator
  */
 export const logout = createAsyncThunk('auth/logout', () => {
   authService.logout();

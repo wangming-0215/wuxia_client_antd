@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import store from 'store2';
 import { useAppSelector, useAppDispatch } from '../app/hooks';
 import { logout, profile } from '../features/auth/authThunk';
 

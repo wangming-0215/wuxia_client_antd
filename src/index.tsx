@@ -1,18 +1,32 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './wdyr';
+// import reportWebVitals from './reportWebVitals';
+// import './wdyr';
 import '@fontsource/zcool-qingke-huangyou';
 import '@fontsource/noto-sans-sc';
 
-const container = document.getElementById('root')!;
-const root = createRoot(container);
+function prepare() {
+  console.log('env: ', process.env);
+  if (process.env.REACT_APP_NODE_ENV === 'development') {
+    const { worker } = require('./__mocks__/browser');
+    return worker.start({ onUnhandledRequest: 'warn' });
+  }
+  return Promise.resolve();
+}
 
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+prepare().then(() => {
+  const container = document.getElementById('root')!;
+  const root = createRoot(container);
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </React.StrictMode>,
+  );
+});
 
-reportWebVitals();
+// reportWebVitals(console.log);

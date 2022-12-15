@@ -6,7 +6,8 @@
     "@fontsource/noto-sans-sc": "^4.5.12",
     "@fontsource/zcool-qingke-huangyou": "^4.5.12",
     "@reduxjs/toolkit": "^1.9.1",
-    "antd": "^5.0.5",
+    "antd": "^5.0.7",
+    "axios": "^1.2.1",
     "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -21,23 +22,30 @@
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
+    "@faker-js/faker": "^7.6.0",
+    "@mswjs/data": "^0.11.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.2.4",
-    "@types/node": "^18.11.13",
+    "@types/node": "^18.11.15",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@types/redux-logger": "^3.0.9",
     "@welldone-software/why-did-you-render": "^7.0.1",
+    "env-cmd": "^10.1.0",
     "eslint-config-prettier": "^8.5.0",
     "husky": "^8.0.2",
+    "jose": "^4.11.1",
     "lint-staged": "^13.1.0",
+    "msw": "^0.49.2",
     "prettier": "^2.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:development": "env-cmd -f .env.development npm run build",
+    "build:production": "env-cmd -f .env.production npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install"
@@ -59,5 +67,8 @@
       "eslint --fix",
       "prettier --write"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

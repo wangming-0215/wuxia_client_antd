@@ -1,7 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { type AxiosError } from 'axios';
 import jwtDecode, { type JwtPayload } from 'jwt-decode';
 import store from 'store2';
+
+import { type RejectValue } from '../../app/store';
 import { LoadingStatus } from '../../constants/enums';
 import { StorageKey } from '../../constants';
 import { login } from './authThunk';
@@ -55,9 +56,12 @@ const slice = createSlice({
       })
       .addMatcher(
         (action) => action.type.endsWith('/rejected'),
-        (state, action: PayloadAction<AxiosError<HttpError>>) => {
-          const { response } = action.payload;
-          if (response && response.status === 401) {
+        (state, action: PayloadAction<RejectValue>) => {
+          if (
+            action.payload &&
+            typeof action.payload !== 'string' &&
+            action.payload.code === 401
+          ) {
             state.authenticated = false;
           }
         },

@@ -15,3 +15,14 @@ export const createAppAsyncThunk = createAsyncThunk.withTypes<{
 
 export type AppDispatch = typeof store.dispatch;
 export type AppState = ReturnType<typeof store.getState>;
+export type RejectValue = string | HttpError | undefined;
+export type AppThunkApiConfig = {
+  state?: AppState;
+  dispatch?: AppDispatch;
+  extra?: unknown;
+  rejectValue?: RejectValue;
+  serializedErrorType?: unknown;
+  pendingMeta?: unknown;
+  fulfilledMeta?: unknown;
+  rejectedMeta?: unknown;
+};

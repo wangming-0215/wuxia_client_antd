@@ -15,5 +15,6 @@
     "xiao",
     "zcool"
   ],
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "explorer.sortOrderLexicographicOptions": "upper"
 }

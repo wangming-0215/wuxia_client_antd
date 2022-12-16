@@ -11,6 +11,10 @@ export default function AuthGuard() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    console.log('<AuthGuard /> mounted');
+  }, []);
+
+  useEffect(() => {
     if (authenticated) {
       dispatch(profile());
     } else {

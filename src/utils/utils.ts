@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+import axios from 'axios';
+
 /**
  * 睡眠
  * @param delay 睡眠时长，单位：秒
@@ -22,6 +25,13 @@ export interface DeepmergeOptions {
   clone?: boolean;
 }
 
+/**
+ * merge
+ * @param target
+ * @param source
+ * @param options
+ * @returns
+ */
 export default function deepmerge<T>(
   target: T,
   source: unknown,
@@ -54,4 +64,28 @@ export default function deepmerge<T>(
   }
 
   return output;
+}
+
+/**
+ * 异常信息
+ * @param error
+ */
+export function getErrorInfo(error: unknown) {
+  if (axios.isAxiosError(error)) {
+    return error.response?.data;
+  }
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return 'Unknown';
+}
+
+/**
+ * 异常文本信息
+ * @param error
+ * @returns
+ */
+export function getErrorMessage(error: unknown) {
+  if (typeof error === 'string') return error;
+  return (error as HttpError | undefined)?.message ?? 'Unknown Error';
 }

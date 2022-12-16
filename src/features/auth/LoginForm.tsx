@@ -1,11 +1,12 @@
-import { Form, Input, Button, message, type FormRule } from 'antd';
+import { Form, Input, Button, type FormRule } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { LoadingStatus } from '../../constants/enums';
 import zhCN from '../../locales/zh_cn';
+import { getErrorMessage } from '../../utils';
+import { useMessage } from '../../context/Message';
 import { login } from './authThunk';
-import classes from './Auth.module.scss';
 
 const { Item: FormItem } = Form;
 
@@ -27,16 +28,16 @@ export default function LoginForm() {
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.auth.status);
   const navigate = useNavigate();
-  const [messageApi] = message.useMessage();
+  const message = useMessage();
 
   // 表单提交
   const handleSubmit = async ({ username, password }: FormValues) => {
     try {
       await dispatch(login({ username, password })).unwrap();
+      message?.info('欢迎回家');
       navigate('/');
     } catch (error) {
-      messageApi.error('hello error');
-      console.log(error);
+      message?.error(getErrorMessage(error));
     }
   };
 
@@ -54,7 +55,6 @@ export default function LoginForm() {
           type="primary"
           htmlType="submit"
           size="large"
-          className={classes.form_submit}
           loading={status === LoadingStatus.Pending}
         >
           登录

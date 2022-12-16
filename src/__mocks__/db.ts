@@ -14,13 +14,11 @@ const PASSWORD = 'wM@123456';
 
 export function initDB() {
   db.account.create({
+    id: 'ec5a84e2-54b0-4823-b214-43aa7105428d',
     username: 'wang_xiao_ming',
     password: PASSWORD,
     role: '神威',
   });
-  for (let i = 0; i < 99; i++) {
-    db.account.create({ password: PASSWORD });
-  }
 }
 
 /**

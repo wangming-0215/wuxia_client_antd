@@ -1,11 +1,15 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import GlobalStyles from './components/GlobalStyles';
 import AuthGuard from './guards/auth.guard';
+import Loadable from './components/Loadable';
+import Loader from './components/Loader';
 
-import Auth from './features/auth';
-import Members from './features/members';
 import { MessageProvider } from './context/Message';
+
+const Auth = Loadable(React.lazy(() => import('./features/auth')));
+const Members = Loadable(React.lazy(() => import('./features/members')));
 
 function App() {
   return (
@@ -21,6 +25,7 @@ function App() {
                 <Route index element={<Members />} />
               </Route>
               <Route path="login" element={<Auth />} />
+              <Route path="test" element={<Loader fullscreen />} />
             </Route>
           </Routes>
         </BrowserRouter>

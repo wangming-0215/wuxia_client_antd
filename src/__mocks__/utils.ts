@@ -1,5 +1,5 @@
 import * as jose from 'jose';
-import { createResponseComposition, context } from 'msw';
+import { createResponseComposition, context, ResponseResolver } from 'msw';
 
 export function isString(input: unknown): input is string {
   return typeof input === 'string';
@@ -26,12 +26,12 @@ export const secret = new TextEncoder().encode('wang_xiao_ming@wuxia');
  * @param id
  * @returns
  */
-export function signToken(id: string) {
-  return new jose.SignJWT({})
+export function signToken(id: string = '') {
+  return new jose.SignJWT({ id })
     .setProtectedHeader({ alg: 'HS256' })
-    .setSubject(id)
+    .setIssuer('wuxia_client')
     .setIssuedAt(Math.floor(new Date().getTime() / 1000))
-    .setExpirationTime('7d')
+    .setExpirationTime('5d')
     .sign(secret);
 }
 
@@ -55,4 +55,43 @@ export function createResponse<T>(code: number, data: T) {
     data: data,
     send: composition,
   };
+}
+
+export function createErrorResponse(error: Error) {
+  switch (error.name) {
+    case 'JWTExpired': {
+      return createResponse(401, {
+        status: 'fail',
+        code: 401,
+        data: null,
+        error: error.stack,
+        message: 'Token Expired',
+      });
+    }
+    case 'JWSInvalid': {
+      return createResponse(401, {
+        status: 'fail',
+        code: 401,
+        data: null,
+        error: error.stack,
+        message: 'Invalid Token',
+      });
+    }
+    default: {
+      return createResponse(500, {
+        status: 'fail',
+        code: 500,
+        data: null,
+        error: error.stack,
+        message: 'Internal Server Error',
+      });
+    }
+  }
+}
+
+type MockRequest = Parameters<ResponseResolver>[0];
+export async function checkToken(req: MockRequest) {
+  const authorization = req.headers.get('authorization');
+  const token = authorization?.slice(7);
+  return verifyToken(token || '');
 }

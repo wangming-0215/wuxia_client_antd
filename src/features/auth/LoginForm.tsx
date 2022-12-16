@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { LoadingStatus } from '../../constants/enums';
 import zhCN from '../../locales/zh_cn';
-import { useMessage } from '../../context/Message';
 import { getErrorMessage } from '../../utils';
+import { useMessage } from '../../context/Message';
 import { login } from './authThunk';
 
 const { Item: FormItem } = Form;

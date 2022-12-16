@@ -1,6 +1,7 @@
 import store from 'store2';
 import { StorageKey } from '../../constants';
 import { HttpClient } from '../../utils';
+import type { Account } from './typing';
 
 const http = HttpClient.instance;
 
@@ -35,5 +36,5 @@ export function logout() {
  * @returns
  */
 export function profile() {
-  return http.get('/api/profile', { jwt: true });
+  return http.get<HttpResponse<Account>>('/api/profile', { jwt: true });
 }

@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getErrorInfo } from '../../utils';
 import { AppThunkApiConfig } from '../../app/store';
 import * as authService from './authService';
+import type { Account } from './typing';
 
 /**
  * login thunk
@@ -30,11 +31,12 @@ export const logout = createAsyncThunk('auth/logout', () => {
 /**
  * profile thunk
  */
-export const profile = createAsyncThunk<void, void, AppThunkApiConfig>(
+export const profile = createAsyncThunk<Account, void, AppThunkApiConfig>(
   'auth/profile',
   async (_, { rejectWithValue }) => {
     try {
-      await authService.profile();
+      const response = await authService.profile();
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(getErrorInfo(error));
     }

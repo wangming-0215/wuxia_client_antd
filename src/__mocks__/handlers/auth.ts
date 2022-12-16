@@ -1,6 +1,12 @@
 import { type ResponseResolver } from 'msw';
 import { db } from '../db';
-import { createResponse, getErrorMessage, signToken } from '../utils';
+import {
+  checkToken,
+  createErrorResponse,
+  createResponse,
+  getErrorMessage,
+  signToken,
+} from '../utils';
 
 type LoginRequestBody = { username: string; password: string };
 
@@ -35,9 +41,7 @@ export function createLoginResolver(): ResponseResolver {
         });
         return response.send();
       }
-
       const token = await signToken(account.id);
-
       const response = createResponse(200, {
         status: 'success',
         code: 200,
@@ -64,15 +68,37 @@ export function createLoginResolver(): ResponseResolver {
  * @returns
  */
 export function createProfileResolver(): ResponseResolver {
-  return (req) => {
-    console.log(req);
-    const response = createResponse(401, {
-      status: 'fail',
-      code: 401,
-      data: null,
-      error: null,
-      message: '未认证',
-    });
-    return response.send();
+  return async (req) => {
+    try {
+      const { payload } = await checkToken(req);
+      const account = db.account.findFirst({
+        where: {
+          id: {
+            equals: payload.id as string,
+          },
+        },
+      });
+      if (!account) {
+        const response = createResponse(404, {
+          status: 'fail',
+          code: 404,
+          data: null,
+          error: null,
+          message: '账号不存在',
+        });
+        return response.send();
+      }
+      const response = createResponse(200, {
+        status: 'success',
+        code: 200,
+        data: { ...account, password: undefined },
+        error: null,
+        message: 'success',
+      });
+      return response.send();
+    } catch (error) {
+      const response = createErrorResponse(error as Error);
+      return response.send();
+    }
   };
 }

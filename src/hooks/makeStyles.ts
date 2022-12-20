@@ -1,42 +1,49 @@
-import React from 'react';
-import { type GlobalToken } from 'antd/es/theme/interface';
-import useToken from './useToken';
-
-type StyleCreator<Props, Token> = (
-  token: Token,
-  props?: Props,
-) => Record<string, React.CSSProperties>;
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
- * makeStyles
- *
- * antd v5.0 版本虽然使用了 css-in-js，但是并没有开放接口在自定义组件中使用 design token，官方文档页只提供了 `useToken` + `style`。
- * 但是，如果直接在 jsx 中写 style，可能会影响阅读体验。
- * 所以写了这个简单的 API，把 style 的内容从 jsx 中分离出来。
- *
- * usage:
- *
- * ```tsx
- * const useStyles = makeStyles<{ large: boolean}>((token, props) => ({
- *   root: {
- *      fontSize: props?.large ? token.fontSize * 10 : token.fontSize,
- *    }
- * }));
- *
- * function HelloWorld() {
- *    const styles = useStyles();
- *
- *    return <div style={styles.root}>Hello World</div>
- * }
- * ```
- * @param styleCreator
- * @returns
+ * inspired by https://github.com/ant-design/use-emotion-css
  */
-function makeStyles<Props>(styleCreator?: StyleCreator<Props, GlobalToken>) {
-  return function useStyles(props?: Props) {
-    const { token } = useToken();
-    return styleCreator?.(token, props) ?? {};
+import { css, CSSInterpolation } from '@emotion/css';
+import { theme } from 'antd';
+import { GlobalToken } from 'antd/es/theme/interface';
+
+type StylesCreator<Props extends object, Token> = (
+  token: Token,
+  props: Props,
+) => CSSInterpolation;
+
+// function overloading
+// overload signature
+function makeStyles(
+  stylesCreator: StylesCreator<{}, GlobalToken>,
+): () => string;
+function makeStyles<Props extends object = {}>(
+  stylesCreator: StylesCreator<Props, GlobalToken>,
+): (props: Props) => string;
+
+// Implementation signature
+function makeStyles(stylesCreator: any) {
+  return function useClassName(props: any) {
+    const { token } = theme.useToken();
+    if (!(window as any).__ANTD_TOKEN__) {
+      (window as any).__ANTD_TOKEN__ = token;
+    }
+    return css(stylesCreator(token, props));
   };
 }
 
 export default makeStyles;
+
+// type MakeStylesReturnType<Props extends object> = keyof Props extends never
+//   ? () => string
+//   : (props: Props) => string;
+
+// function makeStyles<Props extends object = {}>(
+//   stylesCreator: StylesCreator<Props, GlobalToken>,
+// ): MakeStylesReturnType<Props> {
+//   return function useClassName(props?: any) {
+//     const { token } = theme.useToken();
+//     return css(stylesCreator(token, props));
+//   };
+// }
+
+// export default makeStyles;

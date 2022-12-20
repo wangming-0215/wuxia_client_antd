@@ -14,7 +14,10 @@ const Members = Loadable(React.lazy(() => import('./features/members')));
 function App() {
   return (
     <ConfigProvider
-      theme={{ token: { colorBgLayout: '#f9fafc', colorPrimary: '#10b981' } }}
+      theme={{
+        token: { colorPrimary: '#10b981' },
+        // algorithm: theme.darkAlgorithm,
+      }}
     >
       <MessageProvider>
         <GlobalStyles />

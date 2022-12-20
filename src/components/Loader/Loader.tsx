@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import clsx from 'clsx';
-import classes from './Loader.module.scss';
+import useClassName from './styles';
 
 export interface Props extends CommonComponentProps {
   center?: boolean;
@@ -9,15 +9,11 @@ export interface Props extends CommonComponentProps {
 
 export default function Loader(props: PropsWithChildren<Props>) {
   const { className, center = true, fullscreen = false } = props;
+  const rootClassName = useClassName({ center, fullscreen });
 
   return (
-    <div
-      className={clsx(classes.root, className, {
-        [classes.center]: center,
-        [classes.fullscreen]: fullscreen,
-      })}
-    >
-      <span className={classes.loader} />
+    <div className={clsx('Loader_Root', rootClassName, className)}>
+      <span className="loader" />
     </div>
   );
 }

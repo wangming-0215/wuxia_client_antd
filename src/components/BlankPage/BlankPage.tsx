@@ -1,23 +1,19 @@
 import { type PropsWithChildren } from 'react';
 import { Typography } from 'antd';
-import { makeStyles } from '../../hooks';
+import clsx from 'clsx';
 import Container from '../Container';
-
-import classes from './BlankPage.module.scss';
+import useClassName from './styles';
 
 const { Text } = Typography;
 
-const useStyles = makeStyles<{ large: boolean }>((token, props) => ({
-  text: {
-    fontSize: token.fontSize * 2,
-  },
-}));
+type Props = PropsWithChildren<CommonComponentProps>;
 
-function BlankPage({ children }: PropsWithChildren) {
-  const styles = useStyles();
+function BlankPage({ children, className }: Props) {
+  const rootClassName = useClassName();
+
   return (
-    <Container className={classes.root}>
-      <Text style={styles.text}>{children}</Text>
+    <Container className={clsx('BlankPage_Root', rootClassName, className)}>
+      <Text>{children}</Text>
     </Container>
   );
 }

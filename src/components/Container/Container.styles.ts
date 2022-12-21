@@ -1,6 +1,6 @@
 import { unstable_makeStyles } from '../../hooks';
 
-const useClassName = unstable_makeStyles(() => ({
+const useClassName = unstable_makeStyles((token) => ({
   width: '100%',
   marginLeft: 'auto',
   marginRight: 'auto',
@@ -8,6 +8,7 @@ const useClassName = unstable_makeStyles(() => ({
   display: 'block',
   paddingLeft: 16,
   paddingRight: 16,
+  background: token.colorBgContainer,
 }));
 
 export default useClassName;

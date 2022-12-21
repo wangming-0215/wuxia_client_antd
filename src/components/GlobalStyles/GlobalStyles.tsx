@@ -1,41 +1,14 @@
-import { type PropsWithChildren } from 'react';
-import { injectGlobal } from '@emotion/css';
+import { useEffect, type PropsWithChildren } from 'react';
 import { useToken } from '../../hooks';
+import './styles.scss';
 
 export default function GlobalStyles({ children }: PropsWithChildren) {
   const { token } = useToken();
 
-  injectGlobal({
-    '*': {
-      margin: 0,
-      padding: 0,
-      boxSizing: 'border-box',
-    },
-
-    html: {
-      display: 'flex',
-      flexDirection: 'column',
-      width: '100%',
-      minHeight: '100%',
-      WebkitOverflowScrolling: 'touch',
-      WebkitFontSmoothing: 'antialiased',
-    },
-    body: {
-      display: 'flex',
-      flexDirection: 'column',
-      width: '100%',
-      minHeight: '100%',
-      flex: '1 1 auto',
-      backgroundColor: token.colorBgLayout,
-    },
-    '#root': {
-      flex: '1 1 auto',
-      display: 'flex',
-      flexDirection: 'column',
-      width: '100%',
-      height: '100%',
-    },
-  });
+  useEffect(() => {
+    console.log('colorBgLayout: ', token.colorBgLayout);
+    document.body.style.setProperty('--color-bg-layout', token.colorBgLayout);
+  }, [token]);
 
   return <>{children}</>;
 }

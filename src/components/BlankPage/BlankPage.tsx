@@ -2,7 +2,7 @@ import { type PropsWithChildren } from 'react';
 import { Typography } from 'antd';
 import clsx from 'clsx';
 import Container from '../Container';
-import useClassName from './styles';
+import useClassName from './BlankPage.styles';
 
 const { Text } = Typography;
 

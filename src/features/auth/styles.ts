@@ -18,8 +18,9 @@ const useClassName = unstable_makeStyles((token) => ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#fff',
+      backgroundColor: token.colorBgContainer,
       borderRadius: 6,
+      padding: token.sizeStep * 6,
       boxShadow: '0 5px 14px rgb(100 116 139 / 12%)',
       '& > img': {
         width: '100%',
@@ -65,7 +66,7 @@ const useClassName = unstable_makeStyles((token) => ({
       '& button': {
         marginTop: 24,
       },
-      [`@media screen and (min-width: ${token.screenMD}px)`]: {
+      [`@media screen and (min-width: ${token.screenXL}px)`]: {
         width: 480,
       },
     },

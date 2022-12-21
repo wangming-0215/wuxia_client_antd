@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import clsx from 'clsx';
-import useClassName from './styles';
+import useClassName from './Loader.styles';
 
 export interface Props extends CommonComponentProps {
   center?: boolean;

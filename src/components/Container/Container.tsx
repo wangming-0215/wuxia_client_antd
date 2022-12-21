@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { type PropsWithChildren } from 'react';
-import useClassName from './styles';
+import useClassName from './Container.styles';
 
 type ContainerProps = PropsWithChildren<CommonComponentProps>;
 

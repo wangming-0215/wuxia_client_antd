@@ -15,7 +15,7 @@ const PASSWORD = 'wM@123456';
 export function initDB() {
   db.account.create({
     id: 'ec5a84e2-54b0-4823-b214-43aa7105428d',
-    username: 'wang_xiao_ming',
+    username: 'wangxiaoming',
     password: PASSWORD,
     role: '神威',
   });

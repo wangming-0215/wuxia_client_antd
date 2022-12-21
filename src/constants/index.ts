@@ -14,5 +14,6 @@ export const regex = {
  * key of local storage
  */
 export const StorageKey = {
-  jwt: 'x-token',
+  jwt: 'JWT_TOKEN',
+  theme: 'APP_THEME',
 } as const;

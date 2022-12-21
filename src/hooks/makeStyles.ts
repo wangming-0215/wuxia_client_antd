@@ -24,9 +24,6 @@ function makeStyles<Props extends object = {}>(
 function makeStyles(stylesCreator: any) {
   return function useClassName(props: any) {
     const { token } = theme.useToken();
-    if (!(window as any).__ANTD_TOKEN__) {
-      (window as any).__ANTD_TOKEN__ = token;
-    }
     return css(stylesCreator(token, props));
   };
 }

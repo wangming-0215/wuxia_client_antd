@@ -1,7 +1,8 @@
 import { Row, Col, Typography } from 'antd';
 import clsx from 'clsx';
 
-import BackgroundImage from '../../assets/login_background.png';
+import { ReactComponent as LoginBackground } from '../../assets/login_background.svg';
+// import BackgroundImage from '../../assets/login_background.png';
 import LogoImage from '../../assets/logo.png';
 import LoginForm from './LoginForm';
 import useClassName from './styles';
@@ -14,7 +15,7 @@ export default function Auth() {
         <Col xs={0} sm={0} md={0} xl={8} xxl={8}>
           <div className="image">
             <div>
-              <img src={BackgroundImage} alt="" />
+              <LoginBackground />
             </div>
           </div>
         </Col>

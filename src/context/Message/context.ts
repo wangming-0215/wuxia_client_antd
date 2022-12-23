@@ -9,6 +9,6 @@ import { MessageInstance } from 'antd/es/message/interface';
 // open(args: ArgsProps): MessageType;
 // destroy(key?: React.Key): void;
 
-const Context = createContext<MessageInstance | undefined>(undefined);
+const Context = createContext<MessageInstance>({} as MessageInstance);
 
 export default Context;

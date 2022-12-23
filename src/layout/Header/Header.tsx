@@ -3,19 +3,17 @@ import clsx from 'clsx';
 
 import useClassName from './styles';
 import { Sun, Moon } from '../../icons';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { switchTheme } from '../../app/themeSlice';
+import { useThemeData } from '../../context/ThemeData';
 
 function Header() {
   const className = useClassName();
-  const dispatch = useAppDispatch();
-  const themeMode = useAppSelector((state) => state.theme.mode);
+  const { themeData, changeThemeData } = useThemeData();
 
   const handleClick = () => {
-    if (themeMode === 'light') {
-      dispatch(switchTheme('dark'));
+    if (themeData.mode === 'dark') {
+      changeThemeData({ mode: 'light' });
     } else {
-      dispatch(switchTheme('light'));
+      changeThemeData({ mode: 'dark' });
     }
   };
 
@@ -23,7 +21,7 @@ function Header() {
     <header className={clsx('layout-header', className)}>
       <div>
         <Button
-          icon={themeMode === 'light' ? <Moon /> : <Sun />}
+          icon={themeData.mode === 'light' ? <Moon /> : <Sun />}
           onClick={handleClick}
         />
       </div>

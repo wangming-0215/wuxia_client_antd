@@ -9,15 +9,18 @@ import Layout from './layout';
 import createTheme from './theme/createTheme';
 
 import { MessageProvider } from './context/Message';
-import { useAppSelector } from './app/hooks';
+import BlankPage from './components/BlankPage';
+import { useThemeData } from './context/ThemeData';
 
 const Auth = Loadable(React.lazy(() => import('./features/auth')));
 const Members = Loadable(React.lazy(() => import('./features/members')));
 
 function App() {
-  const themeMode = useAppSelector((state) => state.theme.mode);
+  const {
+    themeData: { mode, compact, colorPrimary },
+  } = useThemeData();
 
-  const theme = createTheme(themeMode);
+  const theme = createTheme(mode, compact, colorPrimary);
 
   return (
     <ConfigProvider theme={theme}>
@@ -29,6 +32,10 @@ function App() {
               <Route element={<Layout />}>
                 <Route element={<AuthGuard />}>
                   <Route index element={<Members />} />
+                  <Route
+                    path="activity"
+                    element={<BlankPage>活动</BlankPage>}
+                  />
                 </Route>
               </Route>
               <Route path="login" element={<Auth />} />

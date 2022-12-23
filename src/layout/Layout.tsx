@@ -3,6 +3,7 @@ import clsx from 'clsx';
 
 import Header from './Header';
 import SideBar from './SideBar';
+import Content from './Content';
 import useClassName from './styles';
 
 function Layout() {
@@ -12,7 +13,9 @@ function Layout() {
     <div className={clsx('layout', className)}>
       <SideBar />
       <Header />
-      <Outlet />
+      <Content>
+        <Outlet />
+      </Content>
     </div>
   );
 }

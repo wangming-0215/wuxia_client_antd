@@ -24,7 +24,6 @@ const useClassName = unstable_makeStyles((token) => ({
     }),
     '& .header': {
       color: '#fff',
-      height: 48,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -33,8 +32,20 @@ const useClassName = unstable_makeStyles((token) => ({
         borderBottom: `1px solid ${token.colorBorder}`,
       }),
       fontFamily: 'ZCOOL QingKe HuangYou',
-      fontSize: 24,
+      fontSize: 32,
       marginBottom: 24,
+      paddingTop: 16,
+      paddingBottom: 16,
+      userSelect: 'none',
+      '& .logo': {
+        width: 34,
+        height: 34,
+        marginRight: 8,
+        '& img': {
+          width: '100%',
+          height: 'auto',
+        },
+      },
     },
     '& .menu': {
       paddingLeft: 8,

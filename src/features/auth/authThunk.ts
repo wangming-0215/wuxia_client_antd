@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { getErrorInfo } from '../../utils';
 import { AppThunkApiConfig } from '../../app/store';
-import * as authService from './auth.service';
+import * as authService from './authService';
 import type { Account } from './typing';
 
 /**

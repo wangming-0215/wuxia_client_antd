@@ -14,8 +14,10 @@ const useClassName = unstable_makeStyles((token) => ({
   left: 'auto',
   right: 0,
   backgroundColor: token.colorBgContainer,
-  ...(token.mode !== 'dark' && {
-    boxShadow: 'rgb(100 116 139 / 12%) 0px 1px 4px',
+  boxShadow: 'rgb(100 116 139 / 12%) 0px 1px 4px',
+  ...(token.mode === 'dark' && {
+    boxShadow: 'none',
+    borderBottom: `1px solid ${token.colorBorder}`,
   }),
   '& > div': {
     position: 'relative',

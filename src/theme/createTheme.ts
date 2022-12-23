@@ -2,7 +2,6 @@ import { theme } from 'antd';
 import { ThemeConfig } from 'antd/es/config-provider/context';
 import { type MapToken, type SeedToken } from 'antd/es/theme/interface';
 import { darkAlgorithm, defaultAlgorithm } from './algorithm';
-import { colorPrimary } from './token';
 import ComponentOverrides from './overrides';
 
 declare module 'antd/es/theme/interface/maps' {
@@ -24,6 +23,7 @@ export type ThemeMode = 'dark' | 'light';
 function createTheme(
   mode: ThemeMode = 'light',
   compact: boolean = false,
+  colorPrimary: string = theme.defaultSeed.colorPrimary,
 ): ThemeConfig {
   const algorithm = [
     defaultAlgorithm,
